@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superheroes/blocs/main_bloc.dart';
+import 'package:superheroes/pages/superheroes_images.dart';
 import 'package:superheroes/resources/superheroes_colors.dart';
 import 'package:superheroes/widgets/action_button.dart';
 
@@ -71,8 +72,9 @@ class MainPageStateWidget extends StatelessWidget {
           case MainPageState.loading:
             return LoadingIndicator();
           case MainPageState.noFavorites:
+            return NoFavoritesStateWidget();
           case MainPageState.minSymbols:
-            return MinSymbolsWidget();
+            return MinSymbolsStateWidget();
           case MainPageState.nothingFound:
           case MainPageState.loadingError:
           case MainPageState.searchResults:
@@ -89,8 +91,69 @@ class MainPageStateWidget extends StatelessWidget {
   }
 }
 
-class MinSymbolsWidget extends StatelessWidget {
-  const MinSymbolsWidget({
+class NoFavoritesStateWidget extends StatelessWidget {
+  const NoFavoritesStateWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Stack(
+            children: [
+              Container(
+                width: 108,
+                height: 108,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: SuperheroesColors.blue,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 9.0),
+                child: Image.asset(
+                  SuperheroesImages.ironman,
+                  width: 108,
+                  height: 119,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Text(
+            "No favorites yet",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+              fontSize: 32,
+            ),
+          ),
+          SizedBox(height: 20),
+          Text(
+            "search and add".toUpperCase(),
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
+            ),
+          ),
+          SizedBox(height: 30),
+          ActionButton(
+            text: "Search",
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MinSymbolsStateWidget extends StatelessWidget {
+  const MinSymbolsStateWidget({
     Key? key,
   }) : super(key: key);
 
