@@ -72,20 +72,7 @@ class MainPageStateWidget extends StatelessWidget {
             return LoadingIndicator();
           case MainPageState.noFavorites:
           case MainPageState.minSymbols:
-            return Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.only(top: 110),
-                child: Text(
-                  "Enter at least 3 symbols",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            );
+            return MinSymbolsWidget();
           case MainPageState.nothingFound:
           case MainPageState.loadingError:
           case MainPageState.searchResults:
@@ -98,6 +85,30 @@ class MainPageStateWidget extends StatelessWidget {
             ));
         }
       },
+    );
+  }
+}
+
+class MinSymbolsWidget extends StatelessWidget {
+  const MinSymbolsWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Padding(
+        padding: EdgeInsets.only(top: 110),
+        child: Text(
+          "Enter at least 3 symbols",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+          ),
+        ),
+      ),
     );
   }
 }
