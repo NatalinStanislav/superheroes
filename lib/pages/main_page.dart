@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superheroes/blocs/main_bloc.dart';
 import 'package:superheroes/resources/superheroes_colors.dart';
+import 'package:superheroes/widgets/action_button.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -47,8 +48,7 @@ class MainPageContent extends StatelessWidget {
             onTap: () {
               bloc.nextState();
             },
-            child: Text("Next state".toUpperCase(),
-                style: TextStyle(fontSize: 20, color: Colors.white)),
+            child: ActionButton(text: "Next state",onTap: (){}),
           ),
         )
       ],
