@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:superheroes/blocs/main_bloc.dart';
+import 'package:superheroes/pages/superhero_page.dart';
 import 'package:superheroes/resources/superheroes_images.dart';
 import 'package:superheroes/resources/superheroes_colors.dart';
 import 'package:superheroes/widgets/action_button.dart';
@@ -45,7 +46,8 @@ class MainPageContent extends StatelessWidget {
         MainPageStateWidget(),
         Align(
           alignment: Alignment.bottomCenter,
-          child: ActionButton(text: "Next state", onTap: () => bloc.nextState()),
+          child:
+              ActionButton(text: "Next state", onTap: () => bloc.nextState()),
         )
       ],
     );
@@ -66,11 +68,11 @@ class MainPageStateWidget extends StatelessWidget {
         final MainPageState state = snapshot.data!;
         switch (state) {
           case MainPageState.loading:
-          return LoadingIndicator();
+            return LoadingIndicator();
           case MainPageState.noFavorites:
-          return NoFavoritesStateWidget();
+            return NoFavoritesStateWidget();
           case MainPageState.minSymbols:
-          return MinSymbolsStateWidget();
+            return MinSymbolsStateWidget();
           case MainPageState.nothingFound:
           case MainPageState.loadingError:
           case MainPageState.searchResults:
@@ -97,8 +99,15 @@ class MainPageStateWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: SuperheroCard(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SuperheroPage(name: "Batman"),
+                          ),
+                        );
+                      },
                       imageUrl:
-                      "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg",
+                          "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg",
                       name: "Batman",
                       realName: "Bruce Wayne",
                     ),
@@ -107,8 +116,15 @@ class MainPageStateWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: SuperheroCard(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SuperheroPage(name: "Venom"),
+                          ),
+                        );
+                      },
                       imageUrl:
-                      "https://www.superherodb.com/pictures2/portraits/10/100/22.jpg",
+                          "https://www.superherodb.com/pictures2/portraits/10/100/22.jpg",
                       name: "Venom",
                       realName: "Eddie Brock",
                     ),
@@ -160,6 +176,13 @@ class FavoritesStateWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: SuperheroCard(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SuperheroPage(name: "Batman"),
+                  ),
+                );
+              },
               imageUrl:
                   "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg",
               name: "Batman",
@@ -170,6 +193,13 @@ class FavoritesStateWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: SuperheroCard(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SuperheroPage(name: "Ironman"),
+                  ),
+                );
+              },
               imageUrl:
                   "https://www.superherodb.com/pictures2/portraits/10/100/85.jpg",
               name: "Ironman",
