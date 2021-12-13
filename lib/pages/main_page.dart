@@ -74,6 +74,48 @@ class MainPageStateWidget extends StatelessWidget {
           case MainPageState.nothingFound:
           case MainPageState.loadingError:
           case MainPageState.searchResults:
+            return Align(
+              alignment: Alignment.topLeft,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 90),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      "Search results",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SuperheroCard(
+                      imageUrl:
+                      "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg",
+                      name: "Batman",
+                      realName: "Bruce Wayne",
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: SuperheroCard(
+                      imageUrl:
+                      "https://www.superherodb.com/pictures2/portraits/10/100/22.jpg",
+                      name: "Venom",
+                      realName: "Eddie Brock",
+                    ),
+                  ),
+                ],
+              ),
+            );
           case MainPageState.favorites:
             return FavoritesStateWidget();
           default:
