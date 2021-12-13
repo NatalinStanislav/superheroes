@@ -45,12 +45,7 @@ class MainPageContent extends StatelessWidget {
         MainPageStateWidget(),
         Align(
           alignment: Alignment.bottomCenter,
-          child: GestureDetector(
-            onTap: () {
-              bloc.nextState();
-            },
-            child: ActionButton(text: "Next state", onTap: () {}),
-          ),
+          child: ActionButton(text: "Next state", onTap: () => bloc.nextState()),
         )
       ],
     );
