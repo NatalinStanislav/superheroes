@@ -88,9 +88,9 @@ class MainPageStateWidget extends StatelessWidget {
               subtitle: "Search for something else",
               buttonText: "Search",
               assetImage: SuperheroesImages.hulk,
-              imageHeight: 119,
-              imageWidth: 108,
-              imageTopPadding: 9,
+              imageHeight: 112,
+              imageWidth: 84,
+              imageTopPadding: 16,
             );
           case MainPageState.loadingError:
             return InfoWithButton(
@@ -98,9 +98,9 @@ class MainPageStateWidget extends StatelessWidget {
               subtitle: "Please, try again",
               buttonText: "Retry",
               assetImage: SuperheroesImages.superman,
-              imageHeight: 119,
-              imageWidth: 108,
-              imageTopPadding: 9,
+              imageHeight: 106,
+              imageWidth: 126,
+              imageTopPadding: 22,
             );
           case MainPageState.searchResults:
             return SearchResultsStateWidget();
