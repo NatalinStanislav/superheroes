@@ -5,6 +5,7 @@ import 'package:superheroes/pages/superhero_page.dart';
 import 'package:superheroes/resources/superheroes_images.dart';
 import 'package:superheroes/resources/superheroes_colors.dart';
 import 'package:superheroes/widgets/action_button.dart';
+import 'package:superheroes/widgets/info_with_button.dart';
 import 'package:superheroes/widgets/superhero_card.dart';
 
 class MainPage extends StatefulWidget {
@@ -70,68 +71,39 @@ class MainPageStateWidget extends StatelessWidget {
           case MainPageState.loading:
             return LoadingIndicator();
           case MainPageState.noFavorites:
-            return NoFavoritesStateWidget();
+            return InfoWithButton(
+              title: "No favorites yet",
+              subtitle: "Search and add",
+              buttonText: "Search",
+              assetImage: SuperheroesImages.ironman,
+              imageHeight: 119,
+              imageWidth: 108,
+              imageTopPadding: 9,
+            );
           case MainPageState.minSymbols:
             return MinSymbolsStateWidget();
           case MainPageState.nothingFound:
-          case MainPageState.loadingError:
-          case MainPageState.searchResults:
-            return Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 90),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      "Search results",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: SuperheroCard(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SuperheroPage(name: "Batman"),
-                          ),
-                        );
-                      },
-                      imageUrl:
-                          "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg",
-                      name: "Batman",
-                      realName: "Bruce Wayne",
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: SuperheroCard(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SuperheroPage(name: "Venom"),
-                          ),
-                        );
-                      },
-                      imageUrl:
-                          "https://www.superherodb.com/pictures2/portraits/10/100/22.jpg",
-                      name: "Venom",
-                      realName: "Eddie Brock",
-                    ),
-                  ),
-                ],
-              ),
+            return InfoWithButton(
+              title: "Nothing found",
+              subtitle: "Search for something else",
+              buttonText: "Search",
+              assetImage: SuperheroesImages.hulk,
+              imageHeight: 119,
+              imageWidth: 108,
+              imageTopPadding: 9,
             );
+          case MainPageState.loadingError:
+            return InfoWithButton(
+              title: "Error happened",
+              subtitle: "Please, try again",
+              buttonText: "Retry",
+              assetImage: SuperheroesImages.superman,
+              imageHeight: 119,
+              imageWidth: 108,
+              imageTopPadding: 9,
+            );
+          case MainPageState.searchResults:
+            return SearchResultsStateWidget();
           case MainPageState.favorites:
             return FavoritesStateWidget();
           default:
@@ -142,6 +114,72 @@ class MainPageStateWidget extends StatelessWidget {
             ));
         }
       },
+    );
+  }
+}
+
+class SearchResultsStateWidget extends StatelessWidget {
+  const SearchResultsStateWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 90),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              "Search results",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: SuperheroCard(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SuperheroPage(name: "Batman"),
+                  ),
+                );
+              },
+              imageUrl:
+                  "https://www.superherodb.com/pictures2/portraits/10/100/639.jpg",
+              name: "Batman",
+              realName: "Bruce Wayne",
+            ),
+          ),
+          SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: SuperheroCard(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SuperheroPage(name: "Venom"),
+                  ),
+                );
+              },
+              imageUrl:
+                  "https://www.superherodb.com/pictures2/portraits/10/100/22.jpg",
+              name: "Venom",
+              realName: "Eddie Brock",
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -205,67 +243,6 @@ class FavoritesStateWidget extends StatelessWidget {
               name: "Ironman",
               realName: "Tony Stark",
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class NoFavoritesStateWidget extends StatelessWidget {
-  const NoFavoritesStateWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Stack(
-            children: [
-              Container(
-                width: 108,
-                height: 108,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: SuperheroesColors.blue,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 9.0),
-                child: Image.asset(
-                  SuperheroesImages.ironman,
-                  width: 108,
-                  height: 119,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20),
-          Text(
-            "No favorites yet",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-              fontSize: 32,
-            ),
-          ),
-          SizedBox(height: 20),
-          Text(
-            "search and add".toUpperCase(),
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-            ),
-          ),
-          SizedBox(height: 30),
-          ActionButton(
-            text: "Search",
-            onTap: () {},
           ),
         ],
       ),
