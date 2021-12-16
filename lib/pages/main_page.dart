@@ -71,37 +71,13 @@ class MainPageStateWidget extends StatelessWidget {
           case MainPageState.loading:
             return LoadingIndicator();
           case MainPageState.noFavorites:
-            return InfoWithButton(
-              title: "No favorites yet",
-              subtitle: "Search and add",
-              buttonText: "Search",
-              assetImage: SuperheroesImages.ironman,
-              imageHeight: 119,
-              imageWidth: 108,
-              imageTopPadding: 9,
-            );
+            return NoFavoritesStateWidget();
           case MainPageState.minSymbols:
             return MinSymbolsStateWidget();
           case MainPageState.nothingFound:
-            return InfoWithButton(
-              title: "Nothing found",
-              subtitle: "Search for something else",
-              buttonText: "Search",
-              assetImage: SuperheroesImages.hulk,
-              imageHeight: 112,
-              imageWidth: 84,
-              imageTopPadding: 16,
-            );
+            return NothingFoundStateWidget();
           case MainPageState.loadingError:
-            return InfoWithButton(
-              title: "Error happened",
-              subtitle: "Please, try again",
-              buttonText: "Retry",
-              assetImage: SuperheroesImages.superman,
-              imageHeight: 106,
-              imageWidth: 126,
-              imageTopPadding: 22,
-            );
+            return LoadingErrorWidget();
           case MainPageState.searchResults:
             return SearchResultsStateWidget();
           case MainPageState.favorites:
@@ -118,6 +94,63 @@ class MainPageStateWidget extends StatelessWidget {
   }
 }
 
+class NoFavoritesStateWidget extends StatelessWidget {
+  const NoFavoritesStateWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: InfoWithButton(
+        title: "No favorites yet",
+        subtitle: "Search and add",
+        buttonText: "Search",
+        assetImage: SuperheroesImages.ironman,
+        imageHeight: 119,
+        imageWidth: 108,
+        imageTopPadding: 9,
+      ),
+    );
+  }
+}
+
+class NothingFoundStateWidget extends StatelessWidget {
+  const NothingFoundStateWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: InfoWithButton(
+        title: "Nothing found",
+        subtitle: "Search for something else",
+        buttonText: "Search",
+        assetImage: SuperheroesImages.hulk,
+        imageHeight: 112,
+        imageWidth: 84,
+        imageTopPadding: 16,
+      ),
+    );
+  }
+}
+
+class LoadingErrorWidget extends StatelessWidget {
+  const LoadingErrorWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: InfoWithButton(
+        title: "Error happened",
+        subtitle: "Please, try again",
+        buttonText: "Retry",
+        assetImage: SuperheroesImages.superman,
+        imageHeight: 106,
+        imageWidth: 126,
+        imageTopPadding: 22,
+      ),
+    );
+  }
+}
+
 class SearchResultsStateWidget extends StatelessWidget {
   const SearchResultsStateWidget({
     Key? key,
@@ -128,8 +161,6 @@ class SearchResultsStateWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.topLeft,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 90),
@@ -194,8 +225,6 @@ class FavoritesStateWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.topLeft,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 90),
@@ -234,7 +263,7 @@ class FavoritesStateWidget extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => SuperheroPage(name: "Ironman"),
+                    builder: (context) => SuperheroPage(name: "Ironman "),
                   ),
                 );
               },
