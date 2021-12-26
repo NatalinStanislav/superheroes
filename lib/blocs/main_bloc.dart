@@ -16,14 +16,18 @@ class MainBloc {
 
   MainBloc() {
     stateSubject.add(MainPageState.noFavorites);
-    textSubscription = Rx.combineLatest2<String, List<SuperheroInfo>, MainPageStateInfo>(
-        currentTextSubject.distinct().debounceTime(Duration(milliseconds: 500)),
-        favoriteSperheroesSubject,
-        (searchedText, favorites) => MainPageStateInfo(searchedText, favorites.isNotEmpty)).listen((value) {
-      print("www $value");
+    textSubscription =
+        Rx.combineLatest2<String, List<SuperheroInfo>, MainPageStateInfo>(
+                currentTextSubject
+                    .distinct()
+                    .debounceTime(Duration(milliseconds: 500)),
+                favoriteSperheroesSubject,
+                (searchedText, favorites) =>
+                    MainPageStateInfo(searchedText, favorites.isNotEmpty))
+            .listen((value) {
       searchSubscription?.cancel();
       if (value.searchText.isEmpty) {
-        if(value.haveFavorites) {
+        if (value.haveFavorites) {
           stateSubject.add(MainPageState.favorites);
         } else {
           stateSubject.add(MainPageState.noFavorites);
