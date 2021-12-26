@@ -73,6 +73,9 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      textCapitalization: TextCapitalization.words,
+      cursorColor: Colors.white,
+      textInputAction: TextInputAction.search,
       controller: controller,
       style: TextStyle(
         fontWeight: FontWeight.w400,
@@ -80,6 +83,9 @@ class _SearchWidgetState extends State<SearchWidget> {
         color: Colors.white,
       ),
       decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: Colors.white, width: 2)),
         filled: true,
         fillColor: SuperheroesColors.indigo75,
         isDense: true,
