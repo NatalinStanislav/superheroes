@@ -5,7 +5,6 @@ import 'package:superheroes/blocs/main_bloc.dart';
 import 'package:superheroes/pages/superhero_page.dart';
 import 'package:superheroes/resources/superheroes_images.dart';
 import 'package:superheroes/resources/superheroes_colors.dart';
-import 'package:superheroes/widgets/action_button.dart';
 import 'package:superheroes/widgets/info_with_button.dart';
 import 'package:superheroes/widgets/superhero_card.dart';
 
@@ -249,9 +248,11 @@ class SuperheroesList extends StatelessWidget {
                       ),
                     );
                   },
-                  imageUrl: item.imageUrl,
-                  name: item.name,
-                  realName: item.realName,
+                  superheroInfo: SuperheroInfo(
+                    imageUrl: item.imageUrl,
+                    name: item.name,
+                    realName: item.realName,
+                  ),
                 ),
               );
             },
