@@ -62,7 +62,13 @@ class MainBloc {
 
   Future<List<SuperheroInfo>> search(final String text) async {
     await Future.delayed(Duration(seconds: 1));
-    return SuperheroInfo.mocked;
+    List<SuperheroInfo> list = [];
+    for (final superhero in SuperheroInfo.mocked) {
+      if(superhero.name.toLowerCase().contains(text.toLowerCase())) {
+        list.add(superhero);
+      }
+    }
+    return list;
   }
 
   Stream<MainPageState> observeMainPageState() => stateSubject;
